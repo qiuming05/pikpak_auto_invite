@@ -24,7 +24,8 @@ from urllib.parse import urlparse, parse_qs
 
 
 脚本使用：
-
+pip install -r requirements.txt
+python main.py
 """
 
 DEBUG_MODE = False  # Debug模式，是否打印请求返回信息
