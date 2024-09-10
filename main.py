@@ -16,6 +16,7 @@ from urllib.parse import urlparse, parse_qs
 （2）临时邮箱旧账号可以通过主流邮箱注册新账号并填写邀请码以获得免费会员
 （3）主流邮箱注册新账号可通过做任务和受邀请获取免费会员
 
+PikPak 更新政策：目前完成邀请后无法立刻获取会员，PikPak 需在 24 小时内确认邀请的有效性，确认有效才会给予邀请奖励
 
 经测试，目前邮箱注册时，如果验证注册账号为临时邮箱，那么需要进行 Google 验证；而主流邮箱则不需要
 
@@ -683,6 +684,12 @@ async def main(incode):
             print(f"邮箱: {mail}")
             print(f"密码: {CUSTOM_PASSWORD}")
             PUSH_MSG += f"邀请码: {incode} ==> 邀请成功\n邮箱: {mail}\n密码: {CUSTOM_PASSWORD}\n"
+            return
+        elif activation["add_days"] == 0 and activation['result'] == 'ACCEPTED':
+            print(f"邀请码: {incode} ==> 邀请处理完成，PikPak 需在 24 小时内确认邀请的有效性，确认有效才会给予邀请奖励！用时: {run_time} 秒")
+            print(f"邮箱: {mail}")
+            print(f"密码: {CUSTOM_PASSWORD}")
+            PUSH_MSG += f"邀请码: {incode} ==> 邀请处理完成，PikPak 需在 24 小时内确认邀请的有效性，确认有效才会给予邀请奖励！\n邮箱: {mail}\n密码: {CUSTOM_PASSWORD}\n"
             return
         else:
             print(f"邀请码: {incode} ==> 邀请失败, 用时: {run_time} 秒")
